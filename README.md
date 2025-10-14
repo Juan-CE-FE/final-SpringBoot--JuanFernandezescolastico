@@ -244,7 +244,6 @@ Este repositorio sirve como **apunte práctico** de cómo implementar:
 
 ---
 
-## 🧾 Licencia
-
-Este proyecto es de uso libre para fines educativos.  
-© 2025 - Desarrollado por [Tu Nombre]
+## 🧾 Autor : Rafael Mancina Castro
+ 
+© 2025 - Desarrollado por Rafael Mancina Castro
