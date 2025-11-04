@@ -24,7 +24,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false, unique = true)
-    Integer userId;
+    Long userId;
 
     @Column(name = "username", nullable = false, unique = true, length = 20)
     String username;
@@ -39,7 +39,7 @@ public class User {
     @OneToOne(mappedBy = "owner", fetch = FetchType.LAZY)
     Dni documentDni;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="users_bought_productos", 
                joinColumns={@JoinColumn(name="Users_user_id", referencedColumnName = "user_id")}, 
                inverseJoinColumns={@JoinColumn(name="productos_producto_id", referencedColumnName = "producto_id")})

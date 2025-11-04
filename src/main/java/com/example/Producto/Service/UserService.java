@@ -2,10 +2,9 @@ package com.example.Producto.Service;
 
 import java.util.List;
 
-import com.example.Producto.dto.UserDto;
+import com.example.Producto.persistance.model.User;
 
 public interface UserService {
-    public List<UserDto> getAllUser(); 
-    public UserDto saveUser(UserDto userDto);
-    public UserDto getUserByUsername(String username);   
+    public List<User> getAllUser(); 
+     
 }

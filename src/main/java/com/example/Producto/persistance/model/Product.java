@@ -39,6 +39,7 @@ public class Product {
     @JsonIgnore
     Category category; 
     @ManyToMany(mappedBy="products", fetch = FetchType.LAZY)
+    @JsonIgnore
     List<User> usersWhobought;
     
 

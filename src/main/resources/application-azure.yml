@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:mysql://azuretienda.mysql.database.azure.com:3306/Tiendadb?useSSL=true&verifyServerCertificate=false&allowPublicKeyRetrieval=true
     username: adminaz
-    password: Vedruna2025
+    password: Vedruna51
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

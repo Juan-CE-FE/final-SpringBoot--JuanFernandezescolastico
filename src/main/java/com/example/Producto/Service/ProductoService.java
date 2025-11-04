@@ -10,5 +10,6 @@ public interface ProductoService {
         public Product addProduct(Product product);
         public Product editProduct(Product product, Long id);
         public void deleteProduct( Long id);
+        public void  buyProduct(Long userId,  Long productId);
 }
  

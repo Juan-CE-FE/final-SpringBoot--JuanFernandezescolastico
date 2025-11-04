@@ -56,4 +56,10 @@ public class ProductController {
     public void deleteProduct(@PathVariable  Long id) {
         productoService.deleteProduct(id);
     }
+
+    @PostMapping("/{productId}/buy/{userId}")
+    public ResponseEntity<String> buyProduct(@PathVariable Long productId,@PathVariable Long userId) {
+        productoService.buyProduct(userId, productId);
+        return ResponseEntity.ok("Compra registrada exitosamente.");
+    }
 }
