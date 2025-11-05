@@ -33,3 +33,9 @@ VALUES
 INSERT INTO tiendadb.users_bought_productos (Users_user_id, productos_producto_id)
 VALUES 
 (3, 3) ; -- Sergi compró Auriculares Sony WH-1000XM4
+
+INSERT INTO dnis (number, front_img, back_img, Users_user_id)
+VALUES 
+('12345678A', 'https://example.com/dni/admin_front.jpg', 'https://example.com/dni/admin_back.jpg', 1),
+('98765432B', 'https://example.com/dni/rafa_front.jpg', 'https://example.com/dni/rafa_back.jpg', 2),
+('45678912C', 'https://example.com/dni/sergi_front.jpg', 'https://example.com/dni/sergi_back.jpg', 3);

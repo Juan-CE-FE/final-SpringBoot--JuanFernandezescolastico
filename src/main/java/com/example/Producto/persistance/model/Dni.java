@@ -1,5 +1,7 @@
 package com.example.Producto.persistance.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,5 +33,6 @@ public class Dni {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="Users_user_id", referencedColumnName = "user_id")
+    @JsonIgnore
     User owner;
 }
