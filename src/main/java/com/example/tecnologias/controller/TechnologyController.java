@@ -15,44 +15,49 @@ import com.example.tecnologias.service.TechnologyService;
 import com.example.tecnologias.persistence.model.Technology;
 import lombok.AllArgsConstructor;
 
-@CrossOrigin    
-@RestController  
-@RequestMapping("/api/v1/technologies")  
-@AllArgsConstructor
+@CrossOrigin // Permite peticiones desde cualquier origen
+@RestController // Indica que es un controlador REST
+@RequestMapping("/api/v1/technologies") // Ruta base para las peticiones  
+@AllArgsConstructor // Genera un constructor con todos los atributos
 public class TechnologyController {
 
-    TechnologyService technologyService;
+    TechnologyService technologyService; // Instancia del servicio para manejar la lógica de negocio
     
     @GetMapping
-    public ResponseEntity<List<Technology>> getAllTechnologies() {
-        List<Technology> technologies = technologyService.getAllTechnologies();
-        return ResponseEntity.ok().body(technologies);  
+    public ResponseEntity<List<Technology>> getAllTechnologies() { // Maneja las peticiones GET a la ruta base
+        List<Technology> technologies = technologyService.getAllTechnologies(); // Llama al servicio para obtener todas las tecnologías
+        return ResponseEntity.ok().body(technologies);  // Devuelve la lista de tecnologías con estado 200 OK
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Technology> getTechnologiesById(@PathVariable Integer id) {
+    public ResponseEntity<Technology> getTechnologiesById(@PathVariable Integer id) { // Maneja las peticiones GET a /{id}
+                                                                                // PathVariable extrae el id de la URL
         ResponseEntity <Technology> response = ResponseEntity.ok(technologyService.
-        getTechnologiesById(id));
-        return response;
+        getTechnologiesById(id)); // Llama al servicio para obtener la tecnología por id
+        return response; // Devuelve la tecnología con estado 200 OK
     }
 
     @PostMapping("")
-    public ResponseEntity<Technology> postTechnology(@RequestBody Technology tecnologia) {
+    public ResponseEntity<Technology> postTechnology(@RequestBody Technology tecnologia) { // Maneja las peticiones POST a la ruta base
+                                                                                // RequestBody extrae la tecnología del cuerpo de la petición
        ResponseEntity<Technology> response = ResponseEntity.ok(technologyService.
-       postTechnology(tecnologia));   
-        return response;
+       postTechnology(tecnologia)); // Llama al servicio para crear una nueva tecnología
+        return response; // Devuelve la tecnología creada con estado 200 OK
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Technology> putTechnology(@PathVariable Integer id, @RequestBody Technology tecnologia) {
+    public ResponseEntity<Technology> putTechnology(@PathVariable Integer id, @RequestBody Technology tecnologia) { // Maneja las peticiones PUT a /{id}
+                                                                                // PathVariable extrae el id de la URL
+                                                                                // RequestBody extrae la tecnología del cuerpo de la petición
         ResponseEntity<Technology> response = ResponseEntity.ok(technologyService.putTechnology(id, tecnologia));   
-        return response;
+        return response; // Devuelve la tecnología actualizada con estado 200 OK
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteTechnology(@PathVariable Integer id) {
-    technologyService.deleteTechnology(id);
-    return ResponseEntity.ok("Tecnología eliminada correctamente");
+    public ResponseEntity<String> deleteTechnology(@PathVariable Integer id) { // Maneja las peticiones DELETE a /{id}
+                                                                                // PathVariable extrae el id de la URL
+    technologyService.deleteTechnology(id); // Llama al servicio para eliminar la tecnología
+    return ResponseEntity.ok("Tecnología eliminada correctamente"); // Devuelve un mensaje de éxito con estado 200 OK
     }
 
 
