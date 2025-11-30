@@ -26,7 +26,12 @@ public class Status {
     @Column(name = "status_name")
     private String statusName;    
     
-    @OneToMany(mappedBy = "status", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "status", fetch = FetchType.LAZY) // relación OneToMany porque un estado puede
+                                                            // estar enn varios proyectos, pero un proyecto
+                                                            // no puede tener varios estados a la vez-
+                                                            // Además es LAZY que lo que significa es que
+                                                            // no se cargará la lista de proyectos
+                                                            //  hasta que se le pida.
     @JsonIgnore
     private List<Project> projects;
 }

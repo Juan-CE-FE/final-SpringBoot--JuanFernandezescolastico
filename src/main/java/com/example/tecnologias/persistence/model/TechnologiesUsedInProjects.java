@@ -24,12 +24,15 @@ public class TechnologiesUsedInProjects {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tecnologia_tecnologia_id", referencedColumnName = "tech_id")
+    @ManyToOne(fetch = FetchType.LAZY) // Indica que muchas filas de esta tabla pueden apuntar a 
+                                        // una misma tecnología.
+    @JoinColumn(name = "tecnologia_tecnologia_id", referencedColumnName = "tech_id") // tecnologia_tecnologia_id  
+                                                                // referencia a la columna tech_id en technology
     @JsonIgnore
     private Technology technology;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY) // Indica que muchas filas de esta tabla pueden apuntar a
+                                        // un mismo proyecto.
     @JoinColumn(name = "projects_project_id", referencedColumnName = "project_id")
     @JsonIgnore
     private Project project;
