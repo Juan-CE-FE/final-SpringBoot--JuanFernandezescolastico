@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import java.util.Set;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -46,6 +47,6 @@ public class Developer {
                                                                 // con mappedBy, se referencia
 
     @JsonIgnore // Para que no se serialice el json más veces porque sino sería un bucle infinito
-    private List<Project> projects; // Esto me permite ver todos lo proyectos con un get
+    private Set<Project> projects; // Esto me permite ver todos lo proyectos con un get
                                     // por ejemplo desde developers
 }
