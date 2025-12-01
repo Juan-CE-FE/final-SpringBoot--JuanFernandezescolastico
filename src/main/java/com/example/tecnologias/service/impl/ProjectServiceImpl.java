@@ -51,9 +51,6 @@ public class ProjectServiceImpl implements ProjectService { // Implementa de pro
        Status statusBd = statusRepository.findById(proyecto.getStatus().getStatusId())
             .orElseThrow(() -> new RuntimeException("No se ha encontrado ese Status"));
         proyecto.setStatus(statusBd);
-
-        // Para evitar problemas con relaciones incompletas, no asignamos technologies ni developers aquí
-        // Se crearán relaciones vacías que luego se pueden llenar por otros medios
         
         Project proyectoGuardado = projectRepository.save(proyecto); // Uso el método save para guardarlo en BBDD
 
@@ -79,9 +76,6 @@ public class ProjectServiceImpl implements ProjectService { // Implementa de pro
         Status statusBd = statusRepository.findById(proyecto.getStatus().getStatusId())
             .orElseThrow(() -> new RuntimeException("No se ha encontrado ese Status"));
         proyectoEditado.setStatus(statusBd);
-        
-        // NOTA: No actualizamos technologies ni developers aquí para evitar problemas
-        // con objetos incompletos. Las relaciones se mantienen como estaban.
         
         Project proyectoActualizado = projectRepository.save(proyectoEditado);
         
