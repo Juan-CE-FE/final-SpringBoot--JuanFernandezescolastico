@@ -78,18 +78,17 @@ public class ProjectServiceImpl implements ProjectService { // Implementa de pro
 
     if (proyecto.getDevelopers() != null && !proyecto.getDevelopers().isEmpty()) { // Verifico que no venga nulo o vacío
         
-        List<Developer> developersValidadas = new ArrayList<>(); // Creo una lista para almacenar los developers validadas
+        Set<Developer> developersValidadas = new HashSet<>(); // Uso Set para evitar duplicados
         
         for (Developer dev : proyecto.getDevelopers()) { // Recorro cada developer recibido
         
             Developer developerBd = developerRepository.findById(dev.getDevId()) // Busco el developer por su ID
                 .orElseThrow(() -> new RuntimeException("Developer no encontrado ID: " + dev.getDevId()));
         
-            developersValidadas.add(developerBd); // Si lo encuentra, lo añado a la lista de validadas
+            developersValidadas.add(developerBd); // Si lo encuentra, lo añado al set de validadas
         }
         
         proyecto.setDevelopers(developersValidadas); // Asigno los developers validados al proyecto
-    
     }
 
         Project proyectoGuardado = projectRepository.save(proyecto); // Uso el método save para guardarlo en BBDD
@@ -135,17 +134,16 @@ public class ProjectServiceImpl implements ProjectService { // Implementa de pro
 
     if (proyecto.getDevelopers() != null) { // Verifico que no venga nulo
 
-        
-        List<Developer> developersValidadas = new ArrayList<>(); // Creo una lista para almacenar los developers validadas
+        Set<Developer> developersValidadas = new HashSet<>(); // Uso Set para evitar duplicados
         for (Developer dev : proyecto.getDevelopers()) { // Recorro cada developer recibido
             
             Developer developerBd = developerRepository.findById(dev.getDevId()) // Busco el developer por su ID
                 .orElseThrow(() -> new RuntimeException("Developer no encontrado ID: " + dev.getDevId()));
-            developersValidadas.add(developerBd); // Si lo encuentra, lo añado a la lista
+            developersValidadas.add(developerBd); // Si lo encuentra, lo añado al set
         
         }
 
-        
+
         proyectoEditado.setDevelopers(developersValidadas); // Asigno los developers validados al proyecto editado
     }
         

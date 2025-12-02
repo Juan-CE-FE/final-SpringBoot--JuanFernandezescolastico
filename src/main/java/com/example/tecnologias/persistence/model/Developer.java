@@ -11,6 +11,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.util.Set;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -47,6 +49,8 @@ public class Developer {
                                                                 // con mappedBy, se referencia
 
     @JsonIgnore // Para que no se serialice el json más veces porque sino sería un bucle infinito
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<Project> projects; // Esto me permite ver todos lo proyectos con un get
                                     // por ejemplo desde developers
 }

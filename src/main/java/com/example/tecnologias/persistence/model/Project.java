@@ -1,6 +1,9 @@
 package com.example.tecnologias.persistence.model;
 
 import java.util.List;
+import java.util.Set;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
@@ -77,7 +80,7 @@ public class Project {
                joinColumns = {@JoinColumn(name = "projects_project_id", referencedColumnName = "project_id")}, 
                inverseJoinColumns = {@JoinColumn(name = "developer_dev_id", referencedColumnName = "dev_id")})
                
-    private List<Developer> developers; // List porque un proyecto puede tener varios desarrolladores
-                                        // y porque al ser LAZY, me permite cargar primero las tecnologías
-                                        // con set y después los developers con list.
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<Developer> developers; // Set para evitar duplicados al serializar tras fetch joins.
 }
