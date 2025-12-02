@@ -1,6 +1,6 @@
 package com.example.tecnologias.persistence.model;
 
-import java.util.List;
+import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
@@ -17,6 +17,7 @@ import jakarta.persistence.Table;
 import java.util.Set;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
 
 @Data
 @NoArgsConstructor  
@@ -65,19 +66,22 @@ public class Project {
                 // tecnología igual
                joinColumns = {@JoinColumn(name = "projects_project_id", referencedColumnName = "project_id")}, 
                inverseJoinColumns = {@JoinColumn(name = "tecnologia_tecnologia_id", referencedColumnName = "tech_id")})
+    @EqualsAndHashCode.Exclude
     private Set<Technology> technologies; // Set porque no puede haber tecnologías repetidas en un proyecto.
                                         // y al ser LAZY, me permite cargar las tecnologías y después los developers con list.
     
-    @ManyToMany(fetch = FetchType.LAZY) // ManyToMany, indica que un proyecto puede tener varios 
+    @ManyToMany(fetch = FetchType.LAZY) // ManyToMany, indica que un proyecto puede tener varios
                                         // desarrolladores y que un desarrollador puede tener varios proyectos
-    @JoinTable(name = "developers_worked_on_projects",// Guarda las relaciones en esta tabla
-                // La relación de abajo indica que la columna projects_project_id, apunta a project_id de la tabla projects
-                // y con develpoers igual, la columna developer_dev_id referencia a la dev_id de la tabla projects
-
-               joinColumns = {@JoinColumn(name = "projects_project_id", referencedColumnName = "project_id")}, 
+    @JoinTable(name = "developers_worked_on_projects", // Guarda las relaciones en esta tabla
+                // La relación de abajo indica que la columna projects_project_id apunta a project_id de la tabla projects
+                // y la columna developer_dev_id referencia a dev_id de la tabla developers
+               joinColumns = {@JoinColumn(name = "projects_project_id", referencedColumnName = "project_id")},
                inverseJoinColumns = {@JoinColumn(name = "developer_dev_id", referencedColumnName = "dev_id")})
-               
-    private List<Developer> developers; // List porque un proyecto puede tener varios desarrolladores
-                                        // y porque al ser LAZY, me permite cargar primero las tecnologías
-                                        // con set y después los developers con list.
+
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @EqualsAndHashCode.Exclude
+    private Set<Developer> developers; // Set para evitar developers duplicados al cargar múltiples colecciones
+
+    // Exclude technologies from equals/hashCode to avoid potential recursion when
+    // entities are bidirectionally linked or when Hibernate wraps collections.
 }
